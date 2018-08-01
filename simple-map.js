@@ -35,6 +35,14 @@ class Map {
     }
 
     /**
+     * Returns map object
+     * @returns {google.maps.Map}
+     */
+    getMap() {
+        return this.map;
+    }
+
+    /**
      *
      * @param options {object}
      * @returns {google.maps.Marker}
@@ -43,7 +51,7 @@ class Map {
         /**
          * Marker initial options
          */
-        let markerOptions = options['markerOptions'];
+        let markerOptions = options.markerOptions;
         markerOptions.map = this.map;
 
         /**
@@ -61,10 +69,54 @@ class Map {
          * Generating user events for Marker
          */
         for (let item in options) {
-            console.log(options[item].name);
             marker.addListener(options[item].name, options[item]);
         }
 
         return marker;
+    }
+
+    /**
+     * Create new info window object
+     * @param infoWindowOptions
+     * @returns {google.maps.InfoWindow}
+     */
+    newInfoWindow({...infoWindowOptions}) {
+        /**
+         * Marker to which the info window is displayed
+         * @type {SVGMarkerElement | string}
+         */
+        let marker = infoWindowOptions.options.marker;
+
+        /**
+         * Deleting the marker from options
+         */
+        delete infoWindowOptions.options.marker;
+
+        /**
+         * Creating new infoWindow object
+         * @type {google.maps.InfoWindow}
+         */
+        let infoWindow = new google.maps.InfoWindow(infoWindowOptions.options);
+
+        /**
+         * Deleting options from infoWindowOptions
+         */
+        delete infoWindowOptions.options;
+
+        /**
+         * Adding marker event to open infoWindow
+         */
+        marker.addListener('click', () => {
+            infoWindow.open(this.getMap(), marker);
+        });
+
+        /**
+         * Generating user events for infoWindow
+         */
+        for (let item in infoWindowOptions) {
+            infowindow.addListener(infoWindowOptions[item].name, infoWindowOptions[item]);
+        }
+
+        return infowindow;
     }
 }
