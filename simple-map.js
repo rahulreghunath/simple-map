@@ -5,7 +5,7 @@ class Map {
      * @param mapOptions
      */
     constructor({...mapOptions}) {
-
+        console.table(mapOptions);
         /**
          * Required options
          */
@@ -51,7 +51,7 @@ class Map {
         /**
          * Marker initial options
          */
-        let markerOptions = options.markerOptions;
+        let markerOptions = options.options;
         markerOptions.map = this.map;
 
         /**
@@ -63,7 +63,7 @@ class Map {
         /**
          * Deleting marker options from the object
          */
-        delete options.markerOptions;
+        delete options.options;
 
         /**
          * Generating user events for Marker
@@ -106,7 +106,7 @@ class Map {
         /**
          * Adding marker event to open infoWindow
          */
-        marker.addListener('click', () => {
+        marker.addListener("click", () => {
             infoWindow.open(this.getMap(), marker);
         });
 
@@ -117,6 +117,36 @@ class Map {
             infowindow.addListener(infoWindowOptions[item].name, infoWindowOptions[item]);
         }
 
-        return infowindow;
+        return infoWindow;
+    }
+
+    /**
+     * Creating new polygon
+     * @param polygonOptions
+     */
+    drawPolygon({...polygonOptions}) {
+
+        /**
+         * Creating new polygon object
+         * @type {google.maps.Polygon}
+         */
+        let polygon = new google.maps.Polygon(polygonOptions.options);
+
+        /**
+         * Deleting polygon options
+         */
+        delete polygonOptions.options;
+
+        /**
+         * Setting maap
+         */
+        polygon.setMap(this.getMap());
+
+        /**
+         * Generating user events for Marker
+         */
+        for (let item in polygonOptions) {
+            polygon.addListener(polygonOptions[item].name, polygonOptions[item]);
+        }
     }
 }
