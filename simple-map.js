@@ -5,7 +5,7 @@ class Map {
      * @param mapOptions
      */
     constructor({...mapOptions}) {
-        console.table(mapOptions);
+
         /**
          * Required options
          */
@@ -138,15 +138,111 @@ class Map {
         delete polygonOptions.options;
 
         /**
-         * Setting maap
+         * Setting map
          */
         polygon.setMap(this.getMap());
 
         /**
-         * Generating user events for Marker
+         * Generating user events for Polygon
          */
         for (let item in polygonOptions) {
             polygon.addListener(polygonOptions[item].name, polygonOptions[item]);
         }
+
+        return polygon;
+    }
+
+    /**
+     * Draw poly line
+     * @param polyLineOptions
+     * @returns {google.maps.Polyline}
+     */
+    drawPolyline({...polyLineOptions}) {
+
+        /**
+         * Create new polyline
+         * @type {google.maps.Polyline}
+         */
+        let polyLine = new google.maps.Polyline(polyLineOptions.options);
+
+        /**
+         * Setting map
+         */
+        polyLine.setMap(this.getMap());
+
+        /**
+         * Delete polyLine options Polyline
+         */
+        delete polyLineOptions.options;
+
+        /**
+         * Generating user events
+         */
+        for (let item in polyLineOptions) {
+            polyLine.addListener(polyLineOptions[item].name, polyLineOptions[item]);
+        }
+
+        /**
+         * Return polyline object
+         */
+        return polyLine;
+    }
+
+    /**
+     * Draw Rectangle
+     * @param rectangleOptions
+     */
+    drawRectangle({...rectangleOptions}) {
+
+        /**
+         * Create new rectangle object
+         * @type {google.maps.Rectangle}
+         */
+        let rectangle = new google.maps.Rectangle(rectangleOptions.options);
+
+        /**
+         * Setting map
+         */
+        rectangle.setMap(this.getMap());
+
+        /**
+         * Delete rectangle options
+         */
+        delete rectangleOptions.options;
+
+        /**
+         * Generating user events
+         */
+        for (let item in rectangleOptions) {
+            polyLine.addListener(rectangleOptions[item].name, rectangleOptions[item]);
+        }
+    }
+
+    drawCircle({...circleOptions}) {
+
+        /**
+         * Create new circle object
+         * @type {google.maps.Circle}
+         */
+        let circle = new google.maps.Circle(circleOptions.options);
+
+        /**
+         * Setting map
+         */
+        circle.setMap(this.getMap());
+
+        /**
+         * Delete circle options
+         */
+        delete circleOptions.options;
+
+        /**
+         * Generating user events
+         */
+        for (let item in circleOptions) {
+            circle.addListener(circleOptions[item].name, circleOptions[item]);
+        }
+
+        return circle;
     }
 }
