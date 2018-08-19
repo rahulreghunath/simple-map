@@ -1,0 +1,27 @@
+{
+  "name": "simple-gmap",
+  "version": "1.0.1",
+  "description": "simple helper class for google map javascript api",
+  "main": "map.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahulreghunath/simple-map.git"
+  },
+  "keywords": [
+    "google map javascript api",
+    "google map",
+    "gmsps"
+  ],
+  "author": "Rahul Reghunath <rahulreghunath11@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rahulreghunath/simple-map/issues"
+  },
+  "homepage": "https://github.com/rahulreghunath/simple-map#readme"
+}
